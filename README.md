@@ -16,8 +16,8 @@ from ferminet_tum.driver import NNQS
 li_atom = [Atom(id="Li", pos=jnp.array([0.0, 0.0, 0.0]))]
 n_electrons = [2, 1]  # number of up- and down-spin electrons
 
-n_1 = [32, 32, 32]  # number of hidden units for the one-electron stream
-n_2 = [16, 16, 16]  # number of hidden units for the two-electron stream
+n_1 = [32, 32, 32]  # numbers of hidden units for the one-electron stream
+n_2 = [16, 16, 16]  # numbers of hidden units for the two-electron stream
 n_k = 16  # number of many-electron determinants
 L = len(n_1)  # number of layers
 
