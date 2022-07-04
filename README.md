@@ -1,5 +1,5 @@
 # ferminet - Fermionic Neural Network
-I wrote this library for my internship at TUM. It reproduces the results of [_Pfau et al. (2020)_](https://link.aps.org/doi/10.1103/PhysRevResearch.2.033429 "Ab initio solution of the many-electron Schrödinger equation with deep neural networks"), which trains so-called Fermionic Neural Network to find the ground state energy of an atom or a molecule.
+I wrote this library for my internship at TUM. It reproduces the results of [_Pfau et al. (2020)_](https://link.aps.org/doi/10.1103/PhysRevResearch.2.033429 "Ab initio solution of the many-electron Schrödinger equation with deep neural networks"), which trains so-called Fermionic Neural Network to find the ground state wave functions of an atom or a molecule using neural network quantum states, see [_Carleo and Troyer (2017)_](https://dx.doi.org/10.1126/science.aag2302 "Solving the quantum many-body problem with artificial neural networks").
 
 ## Usage
 Here is an example for a Lithium atom.
