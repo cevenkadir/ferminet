@@ -4,6 +4,7 @@ import jax
 import optax
 from typing import Sequence, Union
 from tqdm.auto import tqdm
+from datetime import datetime
 import h5py
 
 from .sampler import Sampler
