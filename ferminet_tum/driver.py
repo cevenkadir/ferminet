@@ -132,8 +132,8 @@ class NNQS:
         return local_energies, E, O, O_times_local_energy
 
     def train(
-        self, n_iters: int, params: NetParams, optimizer, expected_E: float
-    ) -> Union[Sequence[float], NetParams]:
+        self, n_iters: int, params: NetParams, optimizer
+    ) -> Union[NetParams, Sequence[float]]:
         """Train the network.
 
         Args:
@@ -142,54 +142,59 @@ class NNQS:
 
         Returns:
             `NetParams`: The trained parameters.
+            `Sequence[float]`: The variational energy over the training iterations.
         """
         opt_state = optimizer.init(params)
 
         jitted_calc_local_energies = jax.jit(self.calc_local_energies)
 
-        from IPython.display import display, clear_output
-
-        fig, ax = plt.subplots(dpi=150)
-
-        Es = []
-
         key = jax.random.PRNGKey(0)
 
-        for i in range(n_iters):
-            subkey, key = jax.random.split(key)
-            walker_cfg = self.ferminet.init_walker_config(1.0, key)
-            walker_cfg = jnp.concatenate(walker_cfg, axis=0)
+        date = datetime.now().strftime("%Y_%m_%d-%I:%M:%S_%p")
+        f = h5py.File("results_{}.hdf5".format(date), "w")
+        ds = f.create_dataset("energies", data=np.zeros((n_iters,)))
 
-            subkey, key = jax.random.split(key)
-            log_psi = self.ferminet.apply(params, walker_cfg)
+        ds.attrs["n_electrons"] = self.ferminet.n_electrons
+        ds.attrs["n_1"] = self.ferminet.n_1
+        ds.attrs["n_2"] = self.ferminet.n_2
+        ds.attrs["n_k"] = self.ferminet.n_k
+        ds.attrs["L"] = self.ferminet.L
+        ds.attrs["n_step"] = self.sampler.n_step
+        ds.attrs["step_std_per_dim"] = self.sampler.std
+        ds.attrs["n_samples"] = self.batch_size
 
-            local_energies, E, O, O_times_local_energy = jitted_calc_local_energies(
-                walker_cfg, log_psi, params
-            )
+        with tqdm(total=n_iters, colour="green", leave=True) as pbar:
+            for i in jnp.arange(n_iters):
+                subkey, key = jax.random.split(key)
+                walker_cfg = self.ferminet.init_walker_config(1.0, key)
+                walker_cfg = jnp.concatenate(walker_cfg, axis=0)
 
-            grad_L = jax.tree_util.tree_map(
-                lambda x, y: jnp.nan_to_num(x - y * E), O_times_local_energy, O
-            )
+                subkey, key = jax.random.split(key)
+                log_psi = self.ferminet.apply(params, walker_cfg)
 
-            updates, opt_state = optimizer.update(grad_L, opt_state, params)
-            params = optax.apply_updates(params, updates)
+                local_energies, E, O, O_times_local_energy = jitted_calc_local_energies(
+                    walker_cfg, log_psi, params
+                )
 
-            Es.append(E)
+                grad_L = jax.tree_util.tree_map(
+                    lambda x, y: jnp.nan_to_num(x - y * E), O_times_local_energy, O
+                )
 
-            if i % 10 == 0:
-                ax.cla()
+                updates, opt_state = optimizer.update(grad_L, opt_state, params)
+                params = optax.apply_updates(params, updates)
 
-                ax.plot(jnp.abs(jnp.asarray(Es) - (expected_E)))
-                ax.set_ylabel(r"$|E_0 - <E>|$")
-                ax.set_xlabel("iteration")
-                ax.set_yscale("log")
+                ds[i] = E
 
-                display(fig)
+                if (i + 1) % 10 == 0 and i > 0:
+                    pbar.update(10)
+                    pbar.set_description(
+                        "Energy: {:.5f} ± {:.5f}".format(
+                            np.mean(ds[i - 200 : i]),
+                            np.std(ds[i - 200 : i]),
+                        )
+                    )
 
-                print("{:.5f} ± {:.5f}".format(np.mean(Es[-200:]), np.std(Es[-200:])))
+        E_arr = ds[:]
+        f.close()
 
-            clear_output(wait=True)
-
-        Es = jnp.asarray(Es)
-
-        return params, Es
+        return params, E_arr
