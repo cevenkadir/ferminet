@@ -3,7 +3,7 @@ import numpy as np
 import jax
 import optax
 from typing import Sequence, Union
-import matplotlib.pyplot as plt
+import h5py
 
 from .sampler import Sampler
 from .hamiltonian import Hamiltonian
