@@ -3,6 +3,7 @@ import numpy as np
 import jax
 import optax
 from typing import Sequence, Union
+from tqdm.auto import tqdm
 import h5py
 
 from .sampler import Sampler
