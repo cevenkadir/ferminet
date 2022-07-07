@@ -77,7 +77,15 @@ class FermiNet:
         return sum(self.n_electrons)
 
     def init_params(self, seed=jax.random.PRNGKey(0)) -> NetParams:
+        """
+        Initialize the network parameters.
+
+        Args:
+            seed (`jax.random.PRNGKey`): The random seed.
+
+        Returns:
             `ferminet_tum.params.NetParams`: The network parameters.
+        """
         return NetParams.init(
             self.n_1, self.n_2, self.n_k, self.n_electrons, len(self.atoms), seed
         )
