@@ -8,6 +8,14 @@ from typing import Sequence
 
 @chex.dataclass
 class Atom:
+    """Atom class for the FermiNet.
+
+    Args:
+        id (`str`): The element identifier. For example, `C` or `6` for a Carbon atom.
+        pos (`jnp.DeviceArray`): The position of the atom's nucleus.
+        charge (`int`): The charge of the atom.
+    """
+
     id: str  # element identifier
     pos: chex.ArrayDevice  # position of the atom
     charge: int = 0  # charge of the atom
