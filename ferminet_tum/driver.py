@@ -143,7 +143,7 @@ class NNQS:
     def train(
         self, n_iters: int, params: NetParams, optimizer
     ) -> Union[NetParams, Sequence[float]]:
-        """Train the network.
+        """Train the network. It also saves the variatonal energies.
 
         Args:
             n_iters (`int`): The number of iterations.
