@@ -28,13 +28,13 @@ class NNQS:
         sampler: Sampler,
         hamiltonian: Hamiltonian,
         ferminet: FermiNet,
-        batch_size: int = 4096,
+        n_samples: int = 4096,
     ):
         self._sampler = sampler
         self._hamiltonian = hamiltonian
         self._ferminet = ferminet
 
-        self._batch_size = batch_size
+        self._n_samples = n_samples
 
     @property
     def sampler(self) -> Sampler:
@@ -52,9 +52,9 @@ class NNQS:
         return self._ferminet
 
     @property
-    def batch_size(self) -> int:
-        """(`int`): The batch size."""
-        return self._batch_size
+    def n_samples(self) -> int:
+        """`int`: The number of samples."""
+        return self._n_samples
 
     def calc_local_energy_kernel(
         self,
