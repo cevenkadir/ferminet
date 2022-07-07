@@ -88,10 +88,10 @@ class Atom:
         return cfg
 
     def calc_n_electrons(self) -> jnp.DeviceArray:
-        """Calculate number of electrons of `Atom` object in terms of alpha and beta electrons.
+        """Calculate the number of electrons of `Atom` object in terms of up- and down-electrons.
 
         Returns:
-            jax.numpy.DeviceArray: Number of alpha and beta electrons of `Atom` object.
+            `jax.numpy.DeviceArray`: The number of alpha and beta electrons of `Atom` object.
         """
         n_electrons_per_subshell = [
             jnp.sum(subshell, axis=0) for subshell in self.calc_e_cfg()
