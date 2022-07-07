@@ -29,7 +29,7 @@ class Atom:
         """Calculate the electron configuration of `Atom` object as a sequence of arrays.
 
         Returns:
-            `Sequence[jax.numpy.DeviceArray]`: Electron configuration of `Atom` object.
+            `Sequence[jax.numpy.DeviceArray]`: The electron configuration of `Atom` object.
 
         For example, for `Atom` object with `id` `C`, the returned electron configuration is:
         >>> Atom(id='C', pos=jnp.array([0.0, 0.0, 0.0])).calc_e_cfg()
