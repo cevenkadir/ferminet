@@ -127,15 +127,15 @@ class NNQS:
         )
 
         carry, local_energies = jax.lax.scan(
-            self.calc_local_energy_kernel, carry, None, self.batch_size
+            self.calc_local_energy_kernel, carry, None, self.n_samples
         )
 
-        E = jnp.sum(local_energies) / self.batch_size
+        E = jnp.sum(local_energies) / self.n_samples
 
-        O = jax.tree_util.tree_map(lambda x: x / self.batch_size, carry[3])
+        O = jax.tree_util.tree_map(lambda x: x / self.n_samples, carry[3])
 
         O_times_local_energy = jax.tree_util.tree_map(
-            lambda x: x / self.batch_size, carry[4]
+            lambda x: x / self.n_samples, carry[4]
         )
 
         return local_energies, E, O, O_times_local_energy
@@ -170,7 +170,7 @@ class NNQS:
         ds.attrs["L"] = self.ferminet.L
         ds.attrs["n_step"] = self.sampler.n_step
         ds.attrs["step_std_per_dim"] = self.sampler.std
-        ds.attrs["n_samples"] = self.batch_size
+        ds.attrs["n_samples"] = self.n_samples
 
         with tqdm(total=n_iters, leave=True) as pbar:
             for i in jnp.arange(n_iters):
