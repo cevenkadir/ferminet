@@ -172,7 +172,7 @@ class NNQS:
         ds.attrs["step_std_per_dim"] = self.sampler.std
         ds.attrs["n_samples"] = self.batch_size
 
-        with tqdm(total=n_iters, colour="green", leave=True) as pbar:
+        with tqdm(total=n_iters, leave=True) as pbar:
             for i in jnp.arange(n_iters):
                 subkey, key = jax.random.split(key)
                 walker_cfg = self.ferminet.init_walker_config(1.0, key)
