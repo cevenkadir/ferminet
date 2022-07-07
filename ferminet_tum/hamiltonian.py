@@ -7,8 +7,7 @@ from .network import FermiNet
 
 
 class Hamiltonian:
-    def __init__(self, ferminet: FermiNet):
-        """Hamiltonian class for the FermiNet.
+    """Hamiltonian class for the FermiNet.
 
     Args:
         ferminet (`ferminet_tum.network.FermiNet`): The FermiNet instance.
