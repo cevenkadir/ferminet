@@ -34,7 +34,7 @@ class NetParams:
             n_k (`int`): The number of many-electron determinants.
             n_electrons (`Sequence[int]`): The number of alpha and beta electrons.
             n_atoms (`int`): The total number of atoms.
-            seed (optional): Defaults to jax.random.PRNGKey(0).
+            seed (optional): The random seed. Defaults to jax.random.PRNGKey(0).
 
         Returns:
             `ferminet_tum.params.NetParams`: The initialized NetParams object for the given parameters.
