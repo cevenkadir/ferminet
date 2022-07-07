@@ -128,7 +128,8 @@ class NetParams:
         )
 
     @property
-    def total_n_parameters(self):
+    def total_n_parameters(self) -> int:
+        """`int`: The total number of parameters in the network."""
         n_parameters = 0
 
         n_parameters += sum(V_i.size for V_i in self.V)
