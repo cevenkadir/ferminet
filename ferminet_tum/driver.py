@@ -14,6 +14,15 @@ from .params import NetParams
 
 
 class NNQS:
+    """Neural network quantum state class for the FermiNet.
+
+    Args:
+        sampler (`ferminet_tum.sampler.Sampler`): The sampler instance.
+        hamiltonian (`ferminet_tum.hamiltonian.Hamiltonian`): The Hamiltonian instance.
+        ferminet (`ferminet_tum.network.FermiNet`): The FermiNet instance.
+        batch_size (`int`, optional): The number of samples. Defaults to 4096.
+    """
+
     def __init__(
         self,
         sampler: Sampler,
