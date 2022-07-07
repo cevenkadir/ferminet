@@ -20,6 +20,16 @@ class NetParams:
         omega (`chex.ArrayDevice`): The weights in determinant expansion.
     """
 
+    _V: Sequence[chex.ArrayDevice]
+    _b: Sequence[chex.ArrayDevice]
+    _W: Sequence[chex.ArrayDevice]
+    _c: Sequence[chex.ArrayDevice]
+    _w_alpha: chex.ArrayDevice
+    _g_alpha: chex.ArrayDevice
+    _Sigma_alpha: chex.ArrayDevice
+    _pi_alpha: chex.ArrayDevice
+    _omega: chex.ArrayDevice
+
     @classmethod
     def init(
         cls,
