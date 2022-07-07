@@ -10,14 +10,15 @@ class Hamiltonian:
     def __init__(self, ferminet: FermiNet):
         """Hamiltonian class for the FermiNet.
 
-        Args:
-            ferminet: FermiNet object.
-        """
+    Args:
+        ferminet (`ferminet_tum.network.FermiNet`): The FermiNet instance.
+    """
 
         self._ferminet = ferminet
 
     @property
     def ferminet(self) -> FermiNet:
+        """`ferminet_tum.network.FermiNet`: The FermiNet instance."""
         return self._ferminet
 
     def calc_grads(
@@ -26,7 +27,7 @@ class Hamiltonian:
         """Calculate gradients of the natural logarithm of the absolute value of the wave function with respect to the given walker configuration.
 
         Args:
-            params (`NetParams`): The parameters of the network.
+            params (`ferminet_tum.params.NetParams`): The parameters of the network.
             walker_cfg (`jax.numpy.DeviceArray`): The walker configuration.
 
         Returns:
@@ -58,7 +59,7 @@ class Hamiltonian:
         """Calculate the kinetic part of the local energy.
 
         Args:
-            params (`NetParams`): The parameters of the network.
+            params (`ferminet_tum.params.NetParams`): The parameters of the network.
             walker_cfg (`jax.numpy.DeviceArray`): The walker configuration.
 
         Returns:
@@ -129,7 +130,7 @@ class Hamiltonian:
         """Calculate the local energy.
 
         Args:
-            params (`NetParams`): The parameters of the network.
+            params (`ferminet.params.NetParams`): The parameters of the network.
             walker_cfg (`jax.numpy.DeviceArray`): The walker configuration.
 
         Returns:

@@ -38,17 +38,17 @@ class NNQS:
 
     @property
     def sampler(self) -> Sampler:
-        """(`Sampler`): The sampler instance."""
+        """`ferminet_tum.sampler.Sampler`: The sampler instance."""
         return self._sampler
 
     @property
     def hamiltonian(self) -> Hamiltonian:
-        """(`Hamiltonian`): The Hamiltonian instance."""
+        """`ferminet_tum.hamiltonian.Hamiltonian`: The Hamiltonian instance."""
         return self._hamiltonian
 
     @property
     def ferminet(self) -> FermiNet:
-        """(`FermiNet`): The FermiNet instance."""
+        """`ferminet_tum.network.FermiNet`: The FermiNet instance."""
         return self._ferminet
 
     @property
@@ -107,14 +107,14 @@ class NNQS:
         Args:
             init_walker_cfg (`jax.numpy.DeviceArray`): The initial walker configuration.
             init_log_psi (`jax.numpy.DeviceArray`): The initial logarithm of the modulus of the wave function.
-            params (`NetParams`): The parameters of the network.
+            params (`ferminet_tum.params.NetParams`): The parameters of the network.
             seed (`jax.random.PRNGKey`): The seed for the random number generator.
 
         Returns:
             `jax.numpy.DeviceArray`: The local energies.
             `jax.numpy.DeviceArray`: The variational energy.
-            `NetParams`: The gradients of the natural logarithm of the modulus of the wave function with respect to the network parameters.
-            `NetParams`: The product of the local energies and the gradients of the natural logarithm of the modulus of the wave function with respect to the network parameters.
+            `ferminet_tum.params.NetParams`: The gradients of the natural logarithm of the modulus of the wave function with respect to the network parameters.
+            `ferminet_tum.params.NetParams`: The product of the local energies and the gradients of the natural logarithm of the modulus of the wave function with respect to the network parameters.
         """
 
         carry = (
@@ -147,10 +147,10 @@ class NNQS:
 
         Args:
             n_iters (`int`): The number of iterations.
-            params (`NetParams`): The parameters of the network.
+            params (`ferminet_tum.params.NetParams`): The parameters of the network.
 
         Returns:
-            `NetParams`: The trained parameters.
+            `ferminet_tum.params.NetParams`: The trained parameters.
             `Sequence[float]`: The variational energy over the training iterations.
         """
         opt_state = optimizer.init(params)

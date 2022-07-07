@@ -37,7 +37,7 @@ class NetParams:
             seed (optional): Defaults to jax.random.PRNGKey(0).
 
         Returns:
-            `NetParams`: The initialized NetParams object for the given parameters.
+            `ferminet_tum.params.NetParams`: The initialized NetParams object for the given parameters.
         """
 
         # choose the Xavier uniform initialization as the default for the weights and biases

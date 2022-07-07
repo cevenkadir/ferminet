@@ -13,7 +13,7 @@ class Sampler:
     
     @property
     def ferminet(self)->FermiNet:
-        """(`FermiNet`): The FermiNet instance."""
+        """(`ferminet_tum.network.FermiNet`): The FermiNet instance."""
         return self._ferminet
     
     @property

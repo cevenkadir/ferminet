@@ -21,7 +21,7 @@ class FermiNet:
         FermiNet class.
 
         Args:
-            atoms (`Sequence[Atom]`): The atoms to be used in the calculation.
+            atoms (`Sequence[ferminet_tum.atom.Atom]`): The atoms to be used in the calculation.
             n_electrons (`Sequence[int]`): The number of alpha and beta electrons.
             L (`int`): The number of steps to be performed.
             n_k (`int`): The number of many-electron determinants.
@@ -38,7 +38,7 @@ class FermiNet:
 
     @property
     def atoms(self) -> Sequence[Atom]:
-        """`Sequence[Atom]`: The atoms in the system."""
+        """`Sequence[ferminet_tum.atom.Atom]`: The atoms in the system."""
         return self._atoms
 
     @property
@@ -77,7 +77,7 @@ class FermiNet:
         return sum(self.n_electrons)
 
     def init_params(self, seed=jax.random.PRNGKey(0)) -> NetParams:
-        """`NetParams`: Initialize the network parameters."""
+            `ferminet_tum.params.NetParams`: The network parameters.
         return NetParams.init(
             self.n_1, self.n_2, self.n_k, self.n_electrons, len(self.atoms), seed
         )
@@ -90,7 +90,7 @@ class FermiNet:
         """_summary_
 
         Args:
-            atoms (`Sequence[Atom]`): List of atoms in the molecule.
+            atoms (`Sequence[ferminet_tum.atom.Atom]`): List of atoms in the molecule.
             n_electrons (`Sequence[int]`): Numbers of alpha and beta electrons.
             std (`float`): Standard deviation from the atom positions.
             seed : Defaults to `jax.random.PRNGKey(0)`.
@@ -171,7 +171,7 @@ class FermiNet:
         """Calculate the natural logarithm of the modulus of the wave function for given network parameters and walker configuration.
 
         Args:
-            params (`NetParams`): The network parameters.
+            params (`ferminet_tum.params.NetParams`): The network parameters.
             walker_cfg (`jax.numpy.DeviceArray`): The walker configuration.
 
         Returns:
@@ -257,7 +257,7 @@ class FermiNet:
         """Calculate the next one- and two-electron features for a given layer.
 
         Args:
-            params (`NetParams`): The network parameters.
+            params (`ferminet_tum.params.NetParams`): The network parameters.
             layer_index (`int`): The index of the layer.
             h_alpha (`jax.numpy.DeviceArray`): The one-electron features.
             h_alpha_beta (`jax.numpy.DeviceArray`): The two-electron features.
@@ -327,7 +327,7 @@ class FermiNet:
         """Execute the inter-layer calculations.
 
         Args:
-            params (`NetParams`): The network parameters.
+            params (`ferminet_tum.params.NetParams`): The network parameters.
             h_alpha (`jax.numpy.DeviceArray`): The one-electron features.
             h_alpha_beta (`jax.numpy.DeviceArray`): The two-electron features.
 
@@ -352,7 +352,7 @@ class FermiNet:
         Execute the deterministic layer calculations.
 
         Args:
-            params (`NetParams`): The network parameters.
+            params (`ferminet_tum.params.NetParams`): The network parameters.
             h_alpha (`jax.numpy.DeviceArray`): The one-electron features.
             initial_h_alpha (`jax.numpy.DeviceArray`): The initial one-electron features.
 
