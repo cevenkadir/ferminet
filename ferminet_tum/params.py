@@ -116,15 +116,15 @@ class NetParams:
         omega = init_func_for_vectors(seed, shape=(n_k,)) * over_factor
 
         return cls(
-            V=V,
-            b=b,
-            W=W,
-            c=c,
-            w_alpha=w_alpha,
-            g_alpha=g_alpha,
-            Sigma_alpha=Sigma_alpha,
-            pi_alpha=pi_alpha,
-            omega=omega,
+            _V=V,
+            _b=b,
+            _W=W,
+            _c=c,
+            _w_alpha=w_alpha,
+            _g_alpha=g_alpha,
+            _Sigma_alpha=Sigma_alpha,
+            _pi_alpha=pi_alpha,
+            _omega=omega,
         )
 
     @property
