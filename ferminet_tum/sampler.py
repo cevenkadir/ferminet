@@ -26,26 +26,7 @@ class Sampler:
         """(`float`): The standard deviation of the Gaussian noise in each step for each dimension."""
         return self._std
 
-    def next_pretrain_sample(self, p, calc_wfs,n_electrons, walker_cfg:jnp.DeviceArray, seed=jax.random.PRNGKey(0)):
-      for i in range(self.n_step):
-          subseed, seed = jax.random.split(seed)
-          candidate_walker_cfg = walker_cfg + self.std*jax.random.normal(seed, walker_cfg.shape)
-          
-
-          hf_wfs = calc_wfs(candidate_walker_cfg, n_electrons)
-
-          new_p = jnp.prod(jnp.diag(hf_wfs**2))
-          
-          p_move = new_p/p
-          
-          alpha = jax.random.uniform(subseed)
-          
-          p = jnp.where(p_move>alpha, new_p, p)
-          walker_cfg = jnp.where(p_move>alpha, candidate_walker_cfg, walker_cfg)
-          
-      return walker_cfg, p, hf_wfs
-
-    def next_sample(self, log_psi:jnp.DeviceArray, params:chex.dataclass, walker_cfg:jnp.DeviceArray, seed=jax.random.PRNGKey(0)):
+    def next_sample(self, log_psi:jnp.DeviceArray, params:chex.dataclass, walker_cfg:jnp.DeviceArray, seed=jax.random.PRNGKey(0))->jnp.DeviceArray:
         """Generate the next sample.
         
         Args:
