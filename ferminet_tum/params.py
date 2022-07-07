@@ -143,3 +143,48 @@ class NetParams:
         n_parameters += self.omega.size
 
         return n_parameters
+
+    @property
+    def V(self) -> Sequence[chex.ArrayDevice]:
+        """`Sequence[chex.ArrayDevice]`: The weights for one-electron linear layers."""
+        return self._V
+
+    @property
+    def b(self) -> Sequence[chex.ArrayDevice]:
+        """`Sequence[chex.ArrayDevice]`: The biases for one-electron linear layers."""
+        return self._b
+
+    @property
+    def W(self) -> Sequence[chex.ArrayDevice]:
+        """`Sequence[chex.ArrayDevice]`: The weights for two-electron linear layers."""
+        return self._W
+
+    @property
+    def c(self) -> Sequence[chex.ArrayDevice]:
+        """`Sequence[chex.ArrayDevice]`: The biases for two-electron linear layers."""
+        return self._c
+
+    @property
+    def w_alpha(self) -> chex.ArrayDevice:
+        """`chex.ArrayDevice`: The weights for the final layer."""
+        return self._w_alpha
+
+    @property
+    def g_alpha(self) -> chex.ArrayDevice:
+        """`chex.ArrayDevice`: The biases for the final layer."""
+        return self._g_alpha
+
+    @property
+    def Sigma_alpha(self) -> chex.ArrayDevice:
+        """`chex.ArrayDevice`: The envelope decays."""
+        return self._Sigma_alpha
+
+    @property
+    def pi_alpha(self) -> chex.ArrayDevice:
+        """`chex.ArrayDevice`: The envelope weights."""
+        return self._pi_alpha
+
+    @property
+    def omega(self) -> chex.ArrayDevice:
+        """`chex.ArrayDevice`: The weights in determinant expansion."""
+        return self._omega
