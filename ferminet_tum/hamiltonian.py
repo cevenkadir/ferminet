@@ -43,8 +43,6 @@ class Hamiltonian:
         first_jac = log_psi_jac(params, walker_cfg)
         second_jac = log_psi_jac_jac(params, walker_cfg)
 
-        # print(second_jac)
-
         second_jac = jnp.vstack(
             [
                 second_jac[i, jnp.arange(3), i, jnp.arange(3)]
