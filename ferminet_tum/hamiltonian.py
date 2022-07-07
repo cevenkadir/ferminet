@@ -14,6 +14,7 @@ class Hamiltonian:
         ferminet (`ferminet_tum.network.FermiNet`): The FermiNet instance.
     """
 
+    def __init__(self, ferminet: FermiNet):
         self._ferminet = ferminet
 
     @property
