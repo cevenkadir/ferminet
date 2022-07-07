@@ -26,7 +26,7 @@ class Atom:
         return mendeleev.element(self.id)
 
     def calc_e_cfg(self) -> Sequence[jnp.DeviceArray]:
-        """Calculate electron configuration of `Atom` object as a sequence of arrays.
+        """Calculate the electron configuration of `Atom` object as a sequence of arrays.
 
         Returns:
             `Sequence[jax.numpy.DeviceArray]`: Electron configuration of `Atom` object.
