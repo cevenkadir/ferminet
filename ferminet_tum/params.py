@@ -6,15 +6,19 @@ from functools import partial
 
 @chex.dataclass
 class NetParams:
-    V: Sequence[chex.ArrayDevice]
-    b: Sequence[chex.ArrayDevice]
-    W: Sequence[chex.ArrayDevice]
-    c: Sequence[chex.ArrayDevice]
-    w_alpha: chex.ArrayDevice
-    g_alpha: chex.ArrayDevice
-    Sigma_alpha: chex.ArrayDevice
-    pi_alpha: chex.ArrayDevice
-    omega: chex.ArrayDevice
+    """Network parameters class for the FermiNet.
+
+    Args:
+        V (`Sequence[chex.ArrayDevice]`): The weights for one-electron linear layers.
+        b (`Sequence[chex.ArrayDevice]`): The biases for one-electron linear layers.
+        W (`Sequence[chex.ArrayDevice]`): The weights for two-electron linear layers.
+        c (`Sequence[chex.ArrayDevice]`): The biases for two-electron linear layers.
+        w_alpha (`chex.ArrayDevice`): The weights for the final layer.
+        g_alpha (`chex.ArrayDevice`): The biases for the final layer.
+        Sigma_alpha (`chex.ArrayDevice`): The envelope decays.
+        pi_alpha (`chex.ArrayDevice`): The envelope weights.
+        omega (`chex.ArrayDevice`): The weights in determinant expansion.
+    """
 
     @classmethod
     def init(
