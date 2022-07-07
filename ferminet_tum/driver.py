@@ -60,7 +60,7 @@ class NNQS:
         self,
         carry: tuple,
         x,
-    ) -> Union[tuple, jnp.DeviceArray,]:
+    ) -> Union[tuple, jnp.DeviceArray]:
         """Define the kernel for calculating the local energy to pass to jax.lax.scan.
 
         Args:
@@ -101,7 +101,7 @@ class NNQS:
         init_log_psi: jnp.DeviceArray,
         params: NetParams,
         seed=jax.random.PRNGKey(0),
-    ) -> tuple:
+    ) -> Union[jnp.DeviceArray, jnp.DeviceArray, NetParams, NetParams]:
         """Calculate the local energies.
 
         Args:
