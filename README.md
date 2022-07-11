@@ -82,7 +82,7 @@ n_iters = 7000  # number of iterations
 # training the network
 params, energies = nnqs.train(n_iters, params, optax.adam(learning_rate=1e-3))
 ```
-Energy: -7.46181 ± 0.09077: 100%|██████████████████████| 7000/7000  [53:36<00:00, 2.17it/s]
+    Energy: -7.46181 ± 0.09077: 100%|██████████████████████| 7000/7000  [53:36<00:00, 2.17it/s]
 ```python
 expected_energy = -7.47798 # in Hartree energy
 ```
