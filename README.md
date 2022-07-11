@@ -82,18 +82,7 @@ n_iters = 7000  # number of iterations
 # training the network
 params, energies = nnqs.train(n_iters, params, optax.adam(learning_rate=1e-3))
 ```
-
-
-      0%|          | 0/7000 [00:00<?, ?it/s]
-
-
-    /opt/homebrew/Caskroom/miniforge/base/envs/jax-env/lib/python3.9/site-packages/jax/_src/ops/scatter.py:87: FutureWarning: scatter inputs have incompatible types: cannot safely cast value from dtype=int32 to dtype=bool. In future JAX releases this will result in an error.
-      warnings.warn("scatter inputs have incompatible types: cannot safely cast "
-    /opt/homebrew/Caskroom/miniforge/base/envs/jax-env/lib/python3.9/site-packages/jax/_src/ops/scatter.py:87: FutureWarning: scatter inputs have incompatible types: cannot safely cast value from dtype=int32 to dtype=bool. In future JAX releases this will result in an error.
-      warnings.warn("scatter inputs have incompatible types: cannot safely cast "
-
-
-
+Energy: -7.46181 ± 0.09077: 100%|██████████████████████| 7000/7000  [53:36<00:00, 2.17it/s]
 ```python
 expected_energy = -7.47798 # in Hartree energy
 ```
