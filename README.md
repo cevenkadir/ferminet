@@ -107,18 +107,13 @@ ax.set_xlabel("iteration")
 ax.set_ylabel("<E>")
 ax.axhline(expected_energy,color='r', linestyle='--', label="true energy")
 ax.legend()
+ax.patch.set_facecolor('white')
+fig.patch.set_facecolor('white')
 ```
 
 
-
-
-    <matplotlib.legend.Legend at 0x1643d9940>
-
-
-
-
     
-![png](README_files/README_10_1.png)
+![png](README_files/README_10_0.png)
     
 
 
