@@ -195,11 +195,13 @@ class NNQS:
                 ds[i] = E
 
                 if (i + 1) % 10 == 0 and i > 0:
+                    last_200 = ds[:i][-200:]
+                    last_200 = last_200[~np.isnan(last_200)]
                     pbar.update(10)
                     pbar.set_description(
                         "Energy: {:.5f} ± {:.5f}".format(
-                            np.mean(ds[i - 200 : i]),
-                            np.std(ds[i - 200 : i]),
+                            np.mean(last_200),
+                            np.std(last_200),
                         )
                     )
 
