@@ -100,14 +100,28 @@ expected_energy = -7.47798  # in Hartree energy
 
 
 ```python
-fig, ax = plt.subplots(dpi=150)
+fig, axs = plt.subplots(1,2,dpi=150)
 
-ax.plot(energies, label="FermiNet")
-ax.set_xlabel("iteration")
-ax.set_ylabel("<E>")
-ax.axhline(expected_energy, color="r", linestyle="--", label="true energy")
-ax.legend()
-ax.patch.set_facecolor("white")
+axs[0].plot(energies, linewidth=0.25, label="FermiNet")
+axs[0].set_xlabel("iteration")
+axs[0].set_ylabel("<E> (Hartree)")
+axs[0].axhline(expected_energy, color="r", linestyle="--", label="true energy")
+axs[0].legend()
+axs[0].patch.set_facecolor("white")
+
+per_err = jnp.abs((energies - expected_energy)/expected_energy)*100
+per_err = per_err[~jnp.isnan(per_err)]
+axs[1].plot(per_err, linewidth=0.25, label="FermiNet")
+axs[1].set_xlabel("iteration")
+axs[1].set_ylabel("correlation energy error (%)")
+axs[1].axhline(jnp.abs(1.59e-3/expected_energy)*100, color="y", linestyle="--", label="chemical accuracy")
+axs[1].legend()
+axs[1].set_yscale("log")
+axs[1].patch.set_facecolor("white")
+
+fig.suptitle("a Li atom ({:.3f} ± {:.3f} % error from last 400 iteration)".format(per_err[-400:].mean(), per_err[-400:].std()))
+
+fig.tight_layout()
 fig.patch.set_facecolor("white")
 ```
 
@@ -195,14 +209,28 @@ expected_energy = -8.07050
 
 
 ```python
-fig, ax = plt.subplots(dpi=150)
+fig, axs = plt.subplots(1,2,dpi=150)
 
-ax.plot(energies, label="FermiNet")
-ax.set_xlabel("iteration")
-ax.set_ylabel("<E>")
-ax.axhline(expected_energy, color="r", linestyle="--", label="true energy")
-ax.legend()
-ax.patch.set_facecolor("white")
+axs[0].plot(energies, linewidth=0.25, label="FermiNet")
+axs[0].set_xlabel("iteration")
+axs[0].set_ylabel("<E> (Hartree)")
+axs[0].axhline(expected_energy, color="r", linestyle="--", label="true energy")
+axs[0].legend()
+axs[0].patch.set_facecolor("white")
+
+per_err = jnp.abs((energies - expected_energy)/expected_energy)*100
+per_err = per_err[~jnp.isnan(per_err)]
+axs[1].plot(per_err, linewidth=0.25, label="FermiNet")
+axs[1].set_xlabel("iteration")
+axs[1].set_ylabel("correlation energy error (%)")
+axs[1].axhline(jnp.abs(1.59e-3/expected_energy)*100, color="y", linestyle="--", label="chemical accuracy")
+axs[1].legend()
+axs[1].set_yscale("log")
+axs[1].patch.set_facecolor("white")
+
+fig.suptitle("a LiH molecule ({:.3f} ± {:.3f} % error from last 400 iteration)".format(per_err[-400:].mean(), per_err[-400:].std()))
+
+fig.tight_layout()
 fig.patch.set_facecolor("white")
 ```
 
